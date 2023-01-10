@@ -1,0 +1,59 @@
+mysql> use sse;
+Database changed
+mysql> show tables;
++---------------+
+| Tables_in_sse |
++---------------+
+| bin           |
+| empdepartment |
+| empdept       |
+| employee      |
+| mentees       |
+| student       |
+| studepartment |
+| t             |
++---------------+
+8 rows in set (0.01 sec)
+mysql> select*from mentees;
++-----------+---------+------+---------+------------+-------+---------+
+| Regno     | Name    | Dept | Address | Fathername | Marks | subject |
++-----------+---------+------+---------+------------+-------+---------+
+| 192011090 | Gowtham | CSE  | Chennai | moorthi    |    99 | DBMS    |
+| 192011079 | arun    | BME  | nellore | muthu      |    91 | BIOEVS  |
+| 192011095 | Harish  | ECE  | Madurai | Kannan     |    95 | PDSD    |
+| 192211080 | Dhivya  | ECE  | Tirupur | Ramesh     |    91 | PDSD    |
++-----------+---------+------+---------+------------+-------+---------+
+4 rows in set (0.00 sec)
+mysql> select Regno,Name from mentees where Name IN(select Name from mentees where Dept="ECE");
++-----------+--------+
+| Regno     | Name   |
++-----------+--------+
+| 192011095 | Harish |
+| 192211080 | Dhivya |
++-----------+--------+
+2 rows in set (0.01 sec)
+
+mysql> create table mentees1(Id int(10),Name varchar(20));
+Query OK, 0 rows affected, 1 warning (0.04 sec)
+
+mysql> insert into mentees1(Id,Name)
+    -> select Regno,Name
+    -> from mentees where Dept="ECE";
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select*from mentees1;
++-----------+--------+
+| Id        | Name   |
++-----------+--------+
+| 192011095 | Harish |
+| 192211080 | Dhivya |
++-----------+--------+
+2 rows in set (0.00 sec)
+mysql> select Regno,(select Name from mentees1 where Id=192011095)as Name,Dept,Address,Fathername,Marks,subject from mentees where Regno=192011095;
++-----------+--------+------+---------+------------+-------+---------+
+| Regno     | Name   | Dept | Address | Fathername | Marks | subject |
++-----------+--------+------+---------+------------+-------+---------+
+| 192011095 | Harish | ECE  | Madurai | Kannan     |    95 | PDSD    |
++-----------+--------+------+---------+------------+-------+---------+
+1 row in set (0.00 sec
