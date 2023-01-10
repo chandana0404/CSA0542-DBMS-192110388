@@ -1,0 +1,95 @@
+mysql> use sse;
+Database changed
+mysql> show tables;
++---------------+
+| Tables_in_sse |
++---------------+
+| bin           |
+| empdepartment |
+| empdept       |
+| employee      |
+| mentees       |
+| student       |
+| studepartment |
+| t             |
++---------------+
+8 rows in set (0.01 sec)
+mysql> alter table mentees add subject varchar(20);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update mentees set subject="PDSD" where Dept="ECE";
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> update mentees set subject="DBMS" where Dept="CSE";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update mentees set subject="BIOEVS" where Dept="BME";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from mentees;
++-----------+---------+------+---------+------------+-------+---------+
+| Regno     | Name    | Dept | Address | Fathername | Marks | subject |
++-----------+---------+------+---------+------------+-------+---------+
+| 192011090 | Gowtham | CSE  | Chennai | moorthi    |    99 | DBMS    |
+| 192011079 | arun    | BME  | nellore | muthu      |    91 | BIOEVS  |
+| 192011095 | Harish  | ECE  | Madurai | Kannan     |    95 | PDSD    |
+| 192211080 | Dhivya  | ECE  | Tirupur | Ramesh     |    91 | PDSD    |
++-----------+---------+------+---------+------------+-------+---------+
+4 rows in set (0.00 sec)
+mysql> select*from mentees where Marks BETWEEN 95 and 99;
++-----------+---------+------+---------+------------+-------+---------+
+| Regno     | Name    | Dept | Address | Fathername | Marks | subject |
++-----------+---------+------+---------+------------+-------+---------+
+| 192011090 | Gowtham | CSE  | Chennai | moorthi    |    99 | DBMS    |
+| 192011095 | Harish  | ECE  | Madurai | Kannan     |    95 | PDSD    |
++-----------+---------+------+---------+------------+-------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select*from mentees where subject IN('BIOEVS');
++-----------+------+------+---------+------------+-------+---------+
+| Regno     | Name | Dept | Address | Fathername | Marks | subject |
++-----------+------+------+---------+------------+-------+---------+
+| 192011079 | arun | BME  | nellore | muthu      |    91 | BIOEVS  |
++-----------+------+------+---------+------------+-------+---------+
+1 row in set (0.00 sec)
+mysql> select*from mentees where Marks NOT BETWEEN 95 and 99;
++-----------+--------+------+---------+------------+-------+---------+
+| Regno     | Name   | Dept | Address | Fathername | Marks | subject |
++-----------+--------+------+---------+------------+-------+---------+
+| 192011079 | arun   | BME  | nellore | muthu      |    91 | BIOEVS  |
+| 192211080 | Dhivya | ECE  | Tirupur | Ramesh     |    91 | PDSD    |
++-----------+--------+------+---------+------------+-------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select sum(Marks) from mentees where Dept="ECE";
++------------+
+| sum(Marks) |
++------------+
+|        186 |
++------------+
+1 row in set (0.01 sec)
+mysql> select avg(Marks) as Average from mentees;
++---------+
+| Average |
++---------+
+| 94.0000 |
++---------+
+1 row in set (0.00 sec)
+mysql> select min(Marks) as minimum from mentees;
++---------+
+| minimum |
++---------+
+|      91 |
++---------+
+1 row in set (0.01 sec)
+
+mysql> select max(Marks) as maximum from mentees;
++---------+
+| maximum |
++---------+
+|      99 |
++---------+
