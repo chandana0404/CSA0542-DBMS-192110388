@@ -1,0 +1,105 @@
+mysql> use sse;
+Database changed
+mysql> show tables;
++---------------+
+| Tables_in_sse |
++---------------+
+| bin           |
+| empdepartment |
+| empdept       |
+| employee      |
+| mentees       |
+| student       |
+| studepartment |
+| t             |
++---------------+
+8 rows in set (0.01 sec)
+
+mysql> select* from mentees;
++-----------+---------+------+---------+------------+
+| Regno     | Name    | Dept | Address | Fathername |
++-----------+---------+------+---------+------------+
+| 192011090 | Gowtham | CSE  | Erode   | moorthi    |
+| 192011079 | arun    | BME  | nellore | muthu      |
+| 192011095 | Harish  | ECE  | Madurai | Kannan     |
+| 192011080 | Harini  | ECE  | Tanjore | Velu       |
+| 192211080 | Dhivya  | ECE  | Tirupur | Ramesh     |
++-----------+---------+------+---------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select *from mentees where Dept='ECE';
++-----------+--------+------+---------+------------+
+| Regno     | Name   | Dept | Address | Fathername |
++-----------+--------+------+---------+------------+
+| 192011095 | Harish | ECE  | Madurai | Kannan     |
+| 192211080 | Dhivya | ECE  | Tirupur | Ramesh     |
++-----------+--------+------+---------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select *from mentees where Name="Gowtham";
++-----------+---------+------+---------+------------+
+| Regno     | Name    | Dept | Address | Fathername |
++-----------+---------+------+---------+------------+
+| 192011090 | Gowtham | CSE  | Chennai | moorthi    |
++-----------+---------+------+---------+------------+
+1 row in set (0.00 sec)
+mysql> alter table mentees add Marks int(3);
+Query OK, 0 rows affected, 1 warning (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> update mentees set Marks=99 where Dept="CSE";
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update mentees set Marks=91 where Dept="BME";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update mentees set Marks=91 where Name="Dhivya";
+Query OK, 1 row affected (0.02 sec)
+
+mysql> update mentees set Marks=95 where Name="Harish";
+Query OK, 1 row affected (0.02 sec)
+
+
+mysql> select* from mentees;
++-----------+---------+------+---------+------------+-------+
+| Regno     | Name    | Dept | Address | Fathername | Marks |
++-----------+---------+------+---------+------------+-------+
+| 192011090 | Gowtham | CSE  | Chennai | moorthi    |    99 |
+| 192011079 | arun    | BME  | nellore | muthu      |    91 |
+| 192011095 | Harish  | ECE  | Madurai | Kannan     |    95 |
+| 192211080 | Dhivya  | ECE  | Tirupur | Ramesh     |    91 |
++-----------+---------+------+---------+------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select*from mentees where Name like 'G%';
++-----------+---------+------+---------+------------+-------+
+| Regno     | Name    | Dept | Address | Fathername | Marks |
++-----------+---------+------+---------+------------+-------+
+| 192011090 | Gowtham | CSE  | Chennai | moorthi    |    99 |
++-----------+---------+------+---------+------------+-------+
+1 row in set (0.01 sec)
+mysql> select*from mentees where Dept like '%S%';
++-----------+---------+------+---------+------------+-------+
+| Regno     | Name    | Dept | Address | Fathername | Marks |
++-----------+---------+------+---------+------------+-------+
+| 192011090 | Gowtham | CSE  | Chennai | moorthi    |    99 |
++-----------+---------+------+---------+------------+-------+
+1 row in set (0.00 sec)
+
+mysql> select*from mentees where Address like '%i';
++-----------+---------+------+---------+------------+-------+
+| Regno     | Name    | Dept | Address | Fathername | Marks |
++-----------+---------+------+---------+------------+-------+
+| 192011090 | Gowtham | CSE  | Chennai | moorthi    |    99 |
+| 192011095 | Harish  | ECE  | Madurai | Kannan     |    95 |
++-----------+---------+------+---------+------------+-------+
+2 rows in set (0.00 sec)
+mysql> select *from mentees where Address like 'C___n_i';
++-----------+---------+------+---------+------------+-------+
+| Regno     | Name    | Dept | Address | Fathername | Marks |
++-----------+---------+------+---------+------------+-------+
+| 192011090 | Gowtham | CSE  | Chennai | moorthi    |    99 |
++-----------+---------+------+---------+------------+-------+
+1 row in set (0.00 sec)
