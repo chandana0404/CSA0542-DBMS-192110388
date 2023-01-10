@@ -1,0 +1,56 @@
+mysql> use sse;
+Database changed
+
+mysql> select*from mentees;
++-----------+---------+------+---------+------------+
+| Regno     | Name    | Dept | Address | Fathername |
++-----------+---------+------+---------+------------+
+| 192011090 | Gowtham | CSE  | Erode   | moorthi    |
+| 192011079 | arun    | CSE  | nellore | muthu      |
+| 192011095 | Harish  | ECE  | Madurai | Kannan     |
+| 192011080 | Harini  | ECE  | Tanjore | Velu       |
+| 192211080 | Dhivya  | ECE  | Tirupur | Ramesh     |
++-----------+---------+------+---------+------------+
+5 rows in set (0.00 sec)
+mysql> update mentees set Dept="BME" where Regno=192011079;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from mentees;
++-----------+---------+------+---------+------------+
+| Regno     | Name    | Dept | Address | Fathername |
++-----------+---------+------+---------+------------+
+| 192011090 | Gowtham | CSE  | Erode   | moorthi    |
+| 192011079 | arun    | BME  | nellore | muthu      |
+| 192011095 | Harish  | ECE  | Madurai | Kannan     |
+| 192011080 | Harini  | ECE  | Tanjore | Velu       |
+| 192211080 | Dhivya  | ECE  | Tirupur | Ramesh     |
++-----------+---------+------+---------+------------+
+5 rows in set (0.00 sec)
+mysql> update mentees set Address="Chennai"where Dept="CSE";
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select* from mentees;
++-----------+---------+------+---------+------------+
+| Regno     | Name    | Dept | Address | Fathername |
++-----------+---------+------+---------+------------+
+| 192011090 | Gowtham | CSE  | Chennai | moorthi    |
+| 192011079 | arun    | BME  | nellore | muthu      |
+| 192011095 | Harish  | ECE  | Madurai | Kannan     |
+| 192011080 | Harini  | ECE  | Tanjore | Velu       |
+| 192211080 | Dhivya  | ECE  | Tirupur | Ramesh     |
++-----------+---------+------+---------+------------+
+5 rows in set (0.00 sec)
+mysql> delete from mentees where Fathername="Velu";
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select* from mentees;
++-----------+---------+------+---------+------------+
+| Regno     | Name    | Dept | Address | Fathername |
++-----------+---------+------+---------+------------+
+| 192011090 | Gowtham | CSE  | Chennai | moorthi    |
+| 192011079 | arun    | BME  | nellore | muthu      |
+| 192011095 | Harish  | ECE  | Madurai | Kannan     |
+| 192211080 | Dhivya  | ECE  | Tirupur | Ramesh     |
++-----------+---------+------+---------+------------+
