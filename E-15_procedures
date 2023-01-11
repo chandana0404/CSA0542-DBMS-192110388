@@ -1,0 +1,51 @@
+mysql> use sse;
+Database changed
+
+mysql> select*from mentees;
++-----------+---------+------+---------+------------+-------+---------+
+| Regno     | Name    | Dept | Address | Fathername | Marks | subject |
++-----------+---------+------+---------+------------+-------+---------+
+| 192011090 | Gowtham | CSE  | Chennai | moorthi    |    99 | DBMS    |
+| 192011079 | arun    | BME  | nellore | muthu      |    91 | BIOEVS  |
+| 192011095 | Harish  | ECE  | Madurai | Kannan     |    95 | PDSD    |
+| 192211080 | Dhivya  | ECE  | Tirupur | Ramesh     |    91 | PDSD    |
++-----------+---------+------+---------+------------+-------+---------+
+4 rows in set (0.00 sec)
+mysql> DELIMITER //
+mysql> CREATE PROCEDURE mentee_info()
+    -> BEGIN
+    -> select*from mentees;
+    -> END; //
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CALL mentee_info();
+    -> //
++-----------+---------+------+---------+------------+-------+---------+
+| Regno     | Name    | Dept | Address | Fathername | Marks | subject |
++-----------+---------+------+---------+------------+-------+---------+
+| 192011090 | Gowtham | CSE  | Chennai | moorthi    |    99 | DBMS    |
+| 192011079 | arun    | BME  | nellore | muthu      |    91 | BIOEVS  |
+| 192011095 | Harish  | ECE  | Madurai | Kannan     |    95 | PDSD    |
+| 192211080 | Dhivya  | ECE  | Tirupur | Ramesh     |    91 | PDSD    |
++-----------+---------+------+---------+------------+-------+---------+
+4 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+mysql> CREATE PROCEDURE while_loop()
+    -> BEGIN
+    ->  DECLARE num INT default 1;
+    -> DECLARE res Varchar(50) default '';
+    ->  WHILE num < 78125 DO
+    ->  SET res = CONCAT(res,num,',');
+    -> SET num = num*5;
+    ->  END While;
+    -> SELECT res;
+    -> END //
+Query OK, 0 rows affected (0.01 sec)
+mysql> call while_loop()
+    -> //
++----------------------------+
+| res                        |
++----------------------------+
+| 1,5,25,125,625,3125,15625, |
++----------------------------+
