@@ -1,0 +1,156 @@
+mysql> use sse;
+Database changed
+mysql> show tables;
++---------------+
+| Tables_in_sse |
++---------------+
+| bin           |
+| empdepartment |
+| empdept       |
+| employee      |
+| javalab       |
+| javalab1      |
+| javalab2      |
+| marks         |
+| marks_view    |
+| marks_view1   |
+| mdept         |
+| mentees       |
+| mentees1      |
+| movies        |
+| per           |
+| persons       |
+| student       |
+| studepartment |
+| t             |
++---------------+
+19 rows in set (0.02 sec)
+
+mysql> create table Employee1(Emp_id int(4),Emp_name varchar(20),DOB DATE,DOJ DATE,Salary int(4),Address varchar(20),Experience int(1));
+Query OK, 0 rows affected, 3 warnings (0.04 sec)
+
+mysql> desc Employee1;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| Emp_id     | int         | YES  |     | NULL    |       |
+| Emp_name   | varchar(20) | YES  |     | NULL    |       |
+| DOB        | date        | YES  |     | NULL    |       |
+| DOJ        | date        | YES  |     | NULL    |       |
+| Salary     | int         | YES  |     | NULL    |       |
+| Address    | varchar(20) | YES  |     | NULL    |       |
+| Experience | int         | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+mysql> insert into Employee1 values(100,"Gowtham",'2003-07-15','2022-07-18',100000,"Erode",3);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Employee1 values(101,"Arun",'2003-07-16','2022-11-23',150000,"Chennai",5);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into Employee1 values(102,"Vikas",'2003-01-16','2021-10-23',150000,"Cuddalore",4);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Employee1 values(103,"Harish",'2002-03-25','2022-10-25',150000,"Tanjore",2);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Employee1 values(104,"Ram",'1995-07-15','2019-07-18',102000,"Erode",5);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from Employee1;
++--------+----------+------------+------------+--------+-----------+------------+
+| Emp_id | Emp_name | DOB        | DOJ        | Salary | Address   | Experience |
++--------+----------+------------+------------+--------+-----------+------------+
+|    100 | Gowtham  | 2003-07-15 | 2022-07-18 | 100000 | Erode     |          3 |
+|    101 | Arun     | 2003-07-16 | 2022-11-23 | 150000 | Chennai   |          5 |
+|    102 | Vikas    | 2003-01-16 | 2021-10-23 | 150000 | Cuddalore |          4 |
+|    103 | Harish   | 2002-03-25 | 2022-10-25 | 150000 | Tanjore   |          2 |
+|    104 | Ram      | 1995-07-15 | 2019-07-18 | 102000 | Erode     |          5 |
++--------+----------+------------+------------+--------+-----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> update Employee1 set Salary=200000 where Address="Tanjore";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update Employee1 set Salary=250000 where Address="Cuddalore";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from Employee1;
++--------+----------+------------+------------+--------+-----------+------------+
+| Emp_id | Emp_name | DOB        | DOJ        | Salary | Address   | Experience |
++--------+----------+------------+------------+--------+-----------+------------+
+|    100 | Gowtham  | 2003-07-15 | 2022-07-18 | 100000 | Erode     |          3 |
+|    101 | Arun     | 2003-07-16 | 2022-11-23 | 150000 | Chennai   |          5 |
+|    102 | Vikas    | 2003-01-16 | 2021-10-23 | 250000 | Cuddalore |          4 |
+|    103 | Harish   | 2002-03-25 | 2022-10-25 | 200000 | Tanjore   |          2 |
+|    104 | Ram      | 1995-07-15 | 2019-07-18 | 102000 | Erode     |          5 |
++--------+----------+------------+------------+--------+-----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> create table Edept(Dept_id int(4),Dept_name varchar(20),No_of_Persons int(4));
+Query OK, 0 rows affected, 2 warnings (0.03 sec)
+
+mysql> insert into Edept values
+    -> (1,"Sales",30);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Edept values(2,"HR",10);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Edept values(3,"Manufacturing",40);
+Query OK, 1 row affected (0.01 sec)
+
+
+mysql> insert into Edept values(4,"Accounts",20);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from Edept;
++---------+---------------+---------------+
+| Dept_id | Dept_name     | No_of_Persons |
++---------+---------------+---------------+
+|       1 | Sales         |            30 |
+|       2 | HR            |            10 |
+|       3 | Manufacturing |            40 |
+|       4 | Accounts      |            20 |
++---------+---------------+---------------+
+4 rows in set (0.00 sec)
+
+mysql>  select sum(Salary),min(salary),max(salary),avg(salary) from Employee1;
++-------------+-------------+-------------+-------------+
+| sum(Salary) | min(salary) | max(salary) | avg(salary) |
++-------------+-------------+-------------+-------------+
+|      802000 |      100000 |      250000 | 160400.0000 |
++-------------+-------------+-------------+-------------+
+1 row in set (0.01 sec)
+
+mysql> select Emp_name,Salary from Employee1 where Emp_id=102;
++----------+--------+
+| Emp_name | Salary |
++----------+--------+
+| Vikas    | 250000 |
++----------+--------+
+1 row in set (0.00 sec)
+mysql> select Emp_name,Salary from Employee1 e where exists(select Experience where e.Experience=5);
++----------+--------+
+| Emp_name | Salary |
++----------+--------+
+| Arun     | 150000 |
+| Ram      | 102000 |
++----------+--------+
+2 rows in set (0.01 sec)
+mysql> delete from Employee1 where Emp_id=5;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select*from Employee1;
++--------+----------+------------+------------+--------+-----------+------------+
+| Emp_id | Emp_name | DOB        | DOJ        | Salary | Address   | Experience |
++--------+----------+------------+------------+--------+-----------+------------+
+|    100 | Gowtham  | 2003-07-15 | 2022-07-18 | 100000 | Erode     |          3 |
+|    101 | Arun     | 2003-07-16 | 2022-11-23 | 150000 | Chennai   |          5 |
+|    102 | Vikas    | 2003-01-16 | 2021-10-23 | 250000 | Cuddalore |          4 |
+|    103 | Harish   | 2002-03-25 | 2022-10-25 | 200000 | Tanjore   |          2 |
+|    104 | Ram      | 1995-07-15 | 2019-07-18 | 102000 | Erode     |          5 |
++--------+----------+------------+------------+--------+-----------+------------+
+5 rows in set (0.00 sec
