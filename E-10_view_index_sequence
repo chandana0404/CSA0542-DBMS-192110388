@@ -1,0 +1,90 @@
+mysql> use sse;
+Database changed
+mysql> show tables;
++---------------+
+| Tables_in_sse |
++---------------+
+| bin           |
+| empdepartment |
+| empdept       |
+| employee      |
+| marks_view    |
+| mdept         |
+| mentees       |
+| mentees1      |
+| student       |
+| studepartment |
+| t             |
++---------------+
+11 rows in set (0.00 sec)
+
+mysql> select*from mentees;
++-----------+---------+------+---------+------------+-------+---------+
+| Regno     | Name    | Dept | Address | Fathername | Marks | subject |
++-----------+---------+------+---------+------------+-------+---------+
+| 192011090 | Gowtham | CSE  | Chennai | moorthi    |    99 | DBMS    |
+| 192011079 | arun    | BME  | nellore | muthu      |    91 | BIOEVS  |
+| 192011095 | Harish  | ECE  | Madurai | Kannan     |    95 | PDSD    |
+| 192211080 | Dhivya  | ECE  | Tirupur | Ramesh     |    91 | PDSD    |
++-----------+---------+------+---------+------------+-------+---------+
+4 rows in set (0.00 sec)
+create view marks_view as select subject,Marks from mentees;
+Query OK, 0 rows affected (0.01 sec)
+mysql> select*from marks_view;
++---------+-------+
+| subject | Marks |
++---------+-------+
+| DBMS    |    99 |
+| BIOEVS  |    91 |
+| PDSD    |    95 |
+| PDSD    |    91 |
++---------+-------+
+4 rows in set (0.00 sec)
+mysql> create index subject on mentees(subject);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> show index from mentees;
++---------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| Table   | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment | Visible | Expression |
++---------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| mentees |          1 | subject  |            1 | subject     | A         |           3 |     NULL |   NULL | YES  | BTREE      |         |               | YES     | NULL       |
++---------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+1 row in set (0.01 sec)
+
+mysql> create table per(pid int NOT NULL AUTO_INCREMENT,Name varchar(50),Age int(3),PRIMARY KEY(pid));
+Query OK, 0 rows affected, 1 warning (0.03 sec)
+
+mysql> desc per;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| pid   | int         | NO   | PRI | NULL    | auto_increment |
+| Name  | varchar(50) | YES  |     | NULL    |                |
+| Age   | int         | YES  |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+3 rows in set (0.01 sec)
+
+mysql> alter table per AUTO_INCREMENT=100;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> insert into per(Name,Age) values ("Gowtham",40);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from per;
++-----+---------+------+
+| pid | Name    | Age  |
++-----+---------+------+
+| 100 | Gowtham |   40 |
++-----+---------+------+
+1 row in set (0.00 sec)
+
+mysql> insert into per(Name,Age) values ("Arun",30);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select*from per;
++-----+---------+------+
+| pid | Name    | Age  |
++-----+---------+------+
+| 100 | Gowtham |   40 |
+| 101 | Arun    |   30 |
++-----+---------+------+
